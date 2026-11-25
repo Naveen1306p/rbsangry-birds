@@ -1,0 +1,9 @@
+{
+  "name": "rbsangry-birds",
+  "version": "1.0.0",
+  "private": true,
+  "description": "RBS Angry Birds — Physics slingshot destruction arcade game ready for Vercel deployment",
+  "scripts": {
+    "start": "python -m http.server 3000"
+  }
+}

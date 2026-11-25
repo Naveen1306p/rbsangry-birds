@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>RBS Angry Birds</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='34' r='24' fill='%23e11d48' stroke='%237f1d1d' stroke-width='3'/%3E%3Ccircle cx='24' cy='31' r='5' fill='%23fff'/%3E%3Ccircle cx='40' cy='31' r='5' fill='%23fff'/%3E%3Ccircle cx='25' cy='31' r='2.5' fill='%23111'/%3E%3Ccircle cx='39' cy='31' r='2.5' fill='%23111'/%3E%3Cpath d='M17 24 L29 28 M47 24 L35 28' stroke='%23111' stroke-width='4' stroke-linecap='round'/%3E%3Cpolygon points='28,36 36,36 32,44' fill='%23f59e0b'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="game-shell">
+    <canvas id="game-canvas"></canvas>
+
+    <!-- Top HUD -->
+    <header class="hud-top">
+      <div class="hud-group">
+        <div class="brand-pill">
+          <span class="brand-dot"></span>
+          <span class="brand-title">RBS Angry Birds</span>
+        </div>
+        <button id="btn-levels" class="hud-btn" title="Select Level">
+          <span>Level <strong id="hud-level">1</strong>/<span id="hud-level-total">6</span></span>
+        </button>
+      </div>
+
+      <div id="ability-hint" class="hint-pill">
+        Drag slingshot to aim &bull; Tap mid-air or press Space for power
+      </div>
+
+      <div class="hud-group">
+        <div class="score-pill">
+          <div class="score-block">
+            <span class="score-label">SCORE</span>
+            <span id="hud-score" class="score-val">0</span>
+          </div>
+          <div class="score-divider"></div>
+          <div class="score-block">
+            <span class="score-label">BEST</span>
+            <span id="hud-best" class="score-val best">0</span>
+          </div>
+        </div>
+        <button id="btn-camera" class="hud-btn" title="Peek at target fortress (Tab)">Peek Target</button>
+        <button id="btn-restart" class="hud-btn icon-btn" title="Restart Level (R)">&#x21bb;</button>
+        <button id="btn-sound" class="hud-btn icon-btn" title="Toggle Sound">&#x1f50a;</button>
+      </div>
+    </header>
+
+    <!-- Bottom HUD: Bird Roster + Active Power Indicator -->
+    <footer class="hud-bottom">
+      <div id="bird-queue" class="bird-queue" aria-label="Remaining birds"></div>
+      <div id="level-name-pill" class="level-name-pill">Level 1: Timber Outpost</div>
+    </footer>
+
+    <!-- Level Select Modal -->
+    <div id="modal-levels" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="levels-title">
+      <div class="modal-card levels-card">
+        <div class="modal-header">
+          <div>
+            <h2 id="levels-title">Select Stage</h2>
+            <p class="modal-sub">Smash every pig with the fewest birds for 3 stars!</p>
+          </div>
+          <button id="btn-close-levels" class="hud-btn icon-btn" aria-label="Close">&times;</button>
+        </div>
+        <div id="levels-grid" class="levels-grid"></div>
+        <div class="bird-guide">
+          <div class="guide-item"><span class="swatch red"></span><strong>Red:</strong> Shockwave tap</div>
+          <div class="guide-item"><span class="swatch yellow"></span><strong>Chuck:</strong> Speed dash (wood)</div>
+          <div class="guide-item"><span class="swatch blue"></span><strong>Blues:</strong> Triple split (ice)</div>
+          <div class="guide-item"><span class="swatch black"></span><strong>Bomb:</strong> Blast wave (stone)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Victory / Defeat Modal -->
+    <div id="modal-result" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="result-title">
+      <div class="modal-card result-card">
+        <h2 id="result-title">Level Cleared!</h2>
+        <div id="result-stars" class="result-stars" aria-label="Star rating"></div>
+        <div class="result-stats">
+          <div class="stat-row"><span>Destruction Score</span><strong id="result-score">0</strong></div>
+          <div class="stat-row"><span>Unused Birds Bonus</span><strong id="result-bonus">+0</strong></div>
+          <div class="stat-row total"><span>Total Score</span><strong id="result-total">0</strong></div>
+          <div class="stat-row"><span>Stage Best</span><strong id="result-best">0</strong></div>
+        </div>
+        <div class="result-actions">
+          <button id="btn-result-levels" class="action-btn secondary">Levels</button>
+          <button id="btn-retry" class="action-btn secondary">Replay</button>
+          <button id="btn-next" class="action-btn primary">Next Level &rarr;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="vendor/matter.min.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/levels.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
